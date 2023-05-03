@@ -26,22 +26,18 @@ public class DetailContact extends AppCompatActivity {
         dbhelpe =new Dbhelpe(this);
 
         Intent intent = getIntent();
-        id = intent.getStringExtra("contacte");
+        id = intent.getStringExtra("contactId");
 
-        initialise();
-
-    }
-
-
-    public void initialise(){
         imageView = findViewById(R.id.imagesv);
         nom = findViewById(R.id.detailNom);
         tel = findViewById(R.id.telephone);
         mail = findViewById(R.id.emails);
         not = findViewById(R.id.note);
 
+        dataselect();
 
     }
+
 
     public void dataselect(){
 
@@ -73,5 +69,6 @@ public class DetailContact extends AppCompatActivity {
 
             }while (cursor.moveToNext());
         }
+        db.close();
     }
 }
