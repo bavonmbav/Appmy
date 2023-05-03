@@ -1,7 +1,9 @@
 package com.example.appelmy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,9 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
 
 
         holder.imageCall.setOnClickListener((View)->{
-
+            Intent intent = new Intent(context, DetailContact.class);
+                intent.putExtra("contactId",id);
+                context.startActivity(intent);
         });
     }
 
