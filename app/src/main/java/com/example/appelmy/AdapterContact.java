@@ -63,7 +63,7 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
     class ContactHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView, imageCall;
-        TextView NameContact;
+        TextView NameContact, contaced, contactSup;
 
         public ContactHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +71,8 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
             imageView = itemView.findViewById(R.id.imageView);
             imageCall = itemView.findViewById(R.id.call);
             NameContact = itemView.findViewById(R.id.contactNom);
+            contaced = itemView.findViewById(R.id.contactEd);
+            contactSup = itemView.findViewById(R.id.contactDel);
 
         }
     }
