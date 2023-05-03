@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/seconde"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/_5ssp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    >
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_account_circle_24"
+            android:padding="@dimen/_5ssp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/contactNom"
+            android:textColor="@color/trois"
+            android:layout_toEndOf="@id/imageView"
+            android:text="Namecontact"
+            android:textSize="@dimen/_16sdp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/baseline_wifi_calling_3_24"
+            android:layout_marginEnd="@dimen/_10ssp"
+            android:id="@+id/call"/>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -218,7 +218,7 @@ public class AddContact extends AppCompatActivity {
                 if (grantResults.length>0){
 
 
-                    boolean starageAcces = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean starageAcces = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (starageAcces)
                     {
                         picturegalery();
