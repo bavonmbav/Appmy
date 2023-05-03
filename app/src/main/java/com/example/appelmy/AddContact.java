@@ -75,12 +75,7 @@ public class AddContact extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-
-
-
         initialise();
-
-
 
     }
 
@@ -216,7 +211,6 @@ public class AddContact extends AppCompatActivity {
                 break;
             case IMAGE_STORAGE:
                 if (grantResults.length>0){
-
 
                     boolean starageAcces = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (starageAcces)

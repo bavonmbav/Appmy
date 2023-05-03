@@ -1,0 +1,35 @@
+[33mcommit 807aa51e776d1776fd9fc4d271a9af9d282d4164[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Tshiwew <18mt469@esisalama.org>
+Date:   Wed May 3 19:02:55 2023 +0100
+
+    balayage de vue
+
+[33mcommit 4ee2b7690cb99401d886613f3c9d314f4f154de0[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Tshiwew <18mt469@esisalama.org>
+Date:   Wed May 3 14:50:30 2023 +0100
+
+    liste de contact
+
+[33mcommit e7efd32b0aa9f726e561d263b3077346518d4c41[m
+Author: Tshiwew <18mt469@esisalama.org>
+Date:   Wed May 3 14:36:03 2023 +0100
+
+    liste de detail
+
+[33mcommit b3ba555079f412a22ed9d55bfa575228ebaab3b7[m
+Author: Tshiwew <18mt469@esisalama.org>
+Date:   Wed May 3 12:52:53 2023 +0100
+
+    liste de contact
+
+[33mcommit 8fee8e344f8640bad050b849675b3fd7c33e9cfd[m
+Author: Tshiwew <18mt469@esisalama.org>
+Date:   Wed May 3 00:00:58 2023 +0100
+
+    application de conctact avec la base de donees sqlite
+
+[33mcommit 9caf9de4bcd334ebbc8459cd81a380fbb9fb2e77[m[33m ([m[1;32mtmp[m[33m)[m
+Author: gabriel bavon <99122331+bavonmbav@users.noreply.github.com>
+Date:   Wed May 3 00:03:32 2023 +0100
+
+    Initial commit

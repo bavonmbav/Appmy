@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,7 +64,7 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
     class ContactHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView, imageCall;
-        TextView NameContact, contaced, contactSup;
+        TextView NameContact;
 
         public ContactHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,8 +72,8 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
             imageView = itemView.findViewById(R.id.imageView);
             imageCall = itemView.findViewById(R.id.call);
             NameContact = itemView.findViewById(R.id.contactNom);
-            contaced = itemView.findViewById(R.id.contactEd);
-            contactSup = itemView.findViewById(R.id.contactDel);
+//            contaced = itemView.findViewById(R.id.contactEd);
+//            contactSup = itemView.findViewById(R.id.contactDel);
 
         }
     }
