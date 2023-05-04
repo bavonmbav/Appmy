@@ -20,9 +20,12 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
     private Context context;
     private ArrayList<ModelContact>contactList;
 
+    Dbhelpe dbhelpe;
+
     public AdapterContact(Context context, ArrayList<ModelContact> contactList) {
         this.context = context;
         this.contactList = contactList;
+        dbhelpe = new Dbhelpe(context);
     }
 
     //creation de la vue
@@ -40,7 +43,9 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
         String id = contact.getId();
         String image = contact.getImage();
         String nom = contact.getNom();
-
+        String phone= contact.getPhhone();
+        String email = contact.getEmails();
+        String note = contact.getNotes();
         holder.NameContact.setText(nom);
         if (image.equals(""))
         {
@@ -52,7 +57,35 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
         holder.imageCall.setOnClickListener((View)->{
             Intent intent = new Intent(context, DetailContact.class);
                 intent.putExtra("contactId",id);
+                intent.putExtra("isDetail",true);
                 context.startActivity(intent);
+        });
+// modifier un contact
+        holder.contaced.setOnClickListener((View)->{
+            // create intent to move AddEditActivity to update data
+            Intent intent = new Intent(context,AddContact.class);
+            //pass the value of current position
+            intent.putExtra("ID",id);
+            intent.putExtra("NAME",nom);
+            intent.putExtra("PHONE",phone);
+            intent.putExtra("EMAIL",email);
+            intent.putExtra("NOTE",note);
+            intent.putExtra("IMAGE",image);
+
+            // pass a boolean data to define it is for edit purpose
+            intent.putExtra("isEditMode",true);
+
+            //start intent
+            context.startActivity(intent);
+
+        });
+
+// supprimer un contact
+        holder.contactSup.setOnClickListener((View)->{
+            dbhelpe.deleteContact(id);
+
+            //refresh data by calling resume state of MainActivity
+            ((MainActivity)context).onResume();
         });
     }
 
@@ -63,7 +96,7 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
 
     class ContactHolder extends RecyclerView.ViewHolder{
 
-        ImageView imageView, imageCall;
+        ImageView imageView, imageCall,contaced,contactSup;
         TextView NameContact;
 
         public ContactHolder(@NonNull View itemView) {
@@ -72,8 +105,8 @@ public class AdapterContact extends RecyclerView.Adapter<AdapterContact.ContactH
             imageView = itemView.findViewById(R.id.imageView);
             imageCall = itemView.findViewById(R.id.call);
             NameContact = itemView.findViewById(R.id.contactNom);
-//            contaced = itemView.findViewById(R.id.contactEd);
-//            contactSup = itemView.findViewById(R.id.contactDel);
+            contaced = itemView.findViewById(R.id.Editeur);
+            contactSup = itemView.findViewById(R.id.Deletes);
 
         }
     }

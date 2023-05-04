@@ -30,12 +30,15 @@ public class AddContact extends AppCompatActivity {
 
     private ImageView imageView;
     private EditText name,phone,emails,notes;
+    private  FloatingActionButton add;
+    String id,noms,email,phonees,notess, images;
+    private Boolean isEditMode, isDetail;
 
-    String nom,email,phonee,notess;
+
 
     ActionBar actionBar;
 
-    Dbhelpe dbhelpe;
+    private Dbhelpe dbhelpe;
 
     //constante de permission
     private  static final int IMAGE_PERMISSION = 100;
@@ -49,7 +52,7 @@ public class AddContact extends AppCompatActivity {
     private  String [] storagePermission;
 
     //adress de l'image
-    Uri image;
+    private Uri image;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -69,9 +72,6 @@ public class AddContact extends AppCompatActivity {
 
 
         actionBar = getSupportActionBar();
-
-        assert actionBar != null;
-        actionBar.setTitle("Ajouter un contact");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
@@ -130,13 +130,51 @@ public class AddContact extends AppCompatActivity {
 
     //initialiser les variables
     public void initialise(){
+
         imageView = findViewById(R.id.imageView);
         emails = findViewById(R.id.email);
         name = findViewById(R.id.namTe);
         phone = findViewById(R.id.Phone);
         notes = findViewById(R.id.textmot);
-        FloatingActionButton add = findViewById(R.id.flota);
+        add = findViewById(R.id.flota);
 
+
+        Intent intent = getIntent();
+        isEditMode = intent.getBooleanExtra("isEditMode",false);
+        isDetail = intent.getBooleanExtra("isDetail",false);
+        if (isEditMode){
+            //set toolbar title
+            actionBar.setTitle("Modifier Contact");
+
+            //get the other value from intent
+            id = intent.getStringExtra("ID");
+            noms = intent.getStringExtra("NAME");
+            phonees = intent.getStringExtra("PHONE");
+            email = intent.getStringExtra("EMAIL");
+            notess = intent.getStringExtra("NOTE");
+            images = intent.getStringExtra("IMAGE");
+
+            //set value in editText field
+            name.setText(noms);
+            phone.setText(phonees);
+            emails.setText(email);
+            notes.setText(notess);
+
+            image = Uri.parse(images);
+
+            if (images.equals("")){
+                imageView.setImageResource(R.drawable.baseline_account_circle_24);
+            }else {
+                imageView.setImageURI(image);
+            }
+
+        } else if (isDetail) {
+          id =  intent.getStringExtra("contactId");
+            actionBar.setTitle("Detail");
+        } else {
+            // add mode on
+            actionBar.setTitle("Ajouter un contact");
+        }
         add.setOnClickListener((View)->{
             saveAdd();
         });
@@ -148,28 +186,42 @@ public class AddContact extends AppCompatActivity {
 
     private void saveAdd() {
 
-        nom = name.getText().toString();
+        noms = name.getText().toString();
         email = emails.getText().toString();
-        phonee = phone.getText().toString();
+        phonees = phone.getText().toString();
         notess = notes.getText().toString();
-        if (!nom.isEmpty() || !email.isEmpty() || !phonee.isEmpty() || !notess.isEmpty()){
-           long id =  dbhelpe.insertContact(
-                                ""+image,
-                                ""+nom,
-                                ""+phonee,
-                                ""+email,
-                                ""+notess
-            );
-            Toast.makeText(getApplicationContext(), "Enregistrer " + id, Toast.LENGTH_SHORT).show();
+        if (!noms.isEmpty() || !email.isEmpty() || !phonees.isEmpty() || !notess.isEmpty()){
 
+            if (isEditMode){
+                // edit mode
+                dbhelpe.updateContact(
+                        ""+id,
+                        ""+image,
+                        ""+noms,
+                        ""+phonees,
+                        ""+email,
+                        ""+notess
+                         // updated time will new time
+                );
+                Intent intent = new Intent(AddContact.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
+                       long id =  dbhelpe.insertContact(
+                                            ""+image,
+                                            ""+noms,
+                                            ""+phonees,
+                                            ""+email,
+                                            ""+notess
+                        );
+                        Intent intent = new Intent(AddContact.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                }
         }else {
             Toast.makeText(getApplicationContext(), "Not save", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
-
     //prendre la photo
     private boolean prendrePhoto(){
         boolean resultat = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
@@ -177,7 +229,6 @@ public class AddContact extends AppCompatActivity {
 
         return resultat & resultat2;
     }
-
     //requette pour la camera
     private void requetCamera() {
         ActivityCompat.requestPermissions(this, cameraPermission,IMAGE_PERMISSION);
@@ -191,7 +242,6 @@ public class AddContact extends AppCompatActivity {
         boolean resultat1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
         return resultat1;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -212,7 +262,7 @@ public class AddContact extends AppCompatActivity {
             case IMAGE_STORAGE:
                 if (grantResults.length>0){
 
-                    boolean starageAcces = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean starageAcces = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     if (starageAcces)
                     {
                         picturegalery();
@@ -220,10 +270,8 @@ public class AddContact extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Camera de stockage", Toast.LENGTH_SHORT).show();
                 }
                 break;
-
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -248,4 +296,3 @@ public class AddContact extends AppCompatActivity {
             }
     }
 }
-

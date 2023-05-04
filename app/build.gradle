@@ -62,5 +62,8 @@ dependencies {
     implementation "com.theartofdev.edmodo:android-image-cropper:2.8.+"
 
 
+        implementation 'androidx.viewpager:viewpager:1.0.0'
+    
+
 
 }

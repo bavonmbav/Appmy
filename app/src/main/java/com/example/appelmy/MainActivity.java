@@ -1,11 +1,15 @@
 package com.example.appelmy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -54,5 +58,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         leadata();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        //get search item from menu
+        MenuItem item = menu.findItem(R.id.searchContact);
+        //search area
+        SearchView searchView = (SearchView) item.getActionView();
+        //set max value for width
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchContact(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchContact(newText);
+                return true;
+            }
+        });
+
+        return true;
+    }
+    //rechercher
+    private void searchContact(String query) {
+        contact = new AdapterContact(this,dbhelpe.getSearchContact(query));
+        recyclerView.setAdapter(contact);
+    }
+//  supprimer toutes la liste
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.deleteAllContact:
+                dbhelpe.deleteAllContact();
+                onResume();
+                break;
+        }
+        return true;
     }
 }

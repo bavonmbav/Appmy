@@ -34,10 +34,26 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:src="@drawable/baseline_wifi_calling_3_24"
+            android:src="@drawable/baseline_info_24"
             android:layout_marginEnd="@dimen/_10ssp"
             android:id="@+id/call"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/baseline_delete_24"
+            android:layout_marginEnd="@dimen/_50ssp"
+            android:id="@+id/Deletes"/>
 
+        <ImageView
+            android:id="@+id/Editeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/_30ssp"
+            android:src="@drawable/baseline_edit_24" />
 
 
     </RelativeLayout>

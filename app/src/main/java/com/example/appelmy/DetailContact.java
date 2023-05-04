@@ -1,5 +1,6 @@
 package com.example.appelmy;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,12 +19,14 @@ public class DetailContact extends AppCompatActivity {
     private TextView nom, tel, mail, not;
     private Dbhelpe dbhelpe;
 
+    private ActionBar actionBar;
     String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_contact);
         dbhelpe =new Dbhelpe(this);
+
 
         Intent intent = getIntent();
         id = intent.getStringExtra("contactId");
